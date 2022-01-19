@@ -1,0 +1,18 @@
+body{
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+    background-color: beige;
+    /* background-image: url('../bilder/bv.png'); */
+    /* background-image: url('../bilder/pattern.png'); */
+    background-repeat: repeat;
+
+}
+/* cards */
+.card-footer {
+    background: transparent;
+    border-top: 0px;
+  }
+
+.bg-primary {
+    background-color: #5998f7 !important;
+  }
