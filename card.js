@@ -14,11 +14,9 @@ const cardData = {
 const getNewCard = async () => {
     let uri = '';
     if (cardData.deckId === '') {
-        //const res = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/');
         uri = 'https://deckofcardsapi.com/api/deck/new/shuffle/';
     }
-    else{
-        //const res = await fetch('https://deckofcardsapi.com/api/deck/' + cardData.deckId + '/return/');
+    else {
         uri = 'https://deckofcardsapi.com/api/deck/' + cardData.deckId + '/return/';
     }
     const res = await fetch(uri);
@@ -52,46 +50,39 @@ newCardBtn.addEventListener('click', getNewCard);
 const drawCard = async () => {
 
     if (cardData.deckId === '') {
-        statusField.innerHTML += 'Ingen kortlek.'; ''
+        statusField.innerHTML += 'Ingen kortlek. '; ''
     }
     else {
-
-
         const res = await fetch('https://deckofcardsapi.com/api/deck/' + cardData.deckId + '/draw/?count=1')
 
         const data = await res.json();
         if (data.success) {
-            console.log('Success ' + data.cards[0].code);
             cardData.reminingCard = data.remaining;
-            console.log('Remining cardData' + cardData.reminingCard);
-            console.log('Remining data' + data.remaining);
 
             //cardSection.innerHTML = '';
-            statusField.innerHTML += `${cardData.reminingCard} kort kvar.`;
+            statusField.innerHTML += `${cardData.reminingCard} kort kvar. `;
 
             data.cards.forEach(c => {
-                console.log('Data.cards: ' + c.code);
-
                 //addCardDataInnerHTML(c);
                 addCardDataCreatElement(c);
             });
 
-            function addCardDataCreatElement(c) {          
+            function addCardDataCreatElement(c) {
                 let divCol = crateDiv('col mb-2');
                 let divCard = crateDiv('card');
                 let divCardBody = crateDiv('card-body');
-                let imgChild = creatImg("card-img-top", c.image, 'Card ' +c.suit +' ' + c.value );
-                let head = creatHeader('card-title', c.suit + ' '+ c.value );
-                let par = createP('card-text', 'Kortkod: '+ c.code);
-                
+                let imgChild = creatImg("card-img-top", c.image, 'Card ' + c.suit + ' ' + c.value);
+                let head = creatCardHeader('card-title', c.suit + ' ' + c.value);
+                let paragraph = createParagraph('card-text', 'Kortkod: ' + c.code);
+
                 divCardBody.appendChild(head);
-                divCardBody.appendChild(par);
+                divCardBody.appendChild(paragraph);
 
                 divCard.appendChild(imgChild);
                 divCard.appendChild(divCardBody);
 
                 divCol.appendChild(divCard);
-         
+
                 cardSection.appendChild(divCol);
             }
 
@@ -103,7 +94,7 @@ const drawCard = async () => {
 
                 return div1;
             }
-            function creatHeader(classValue, text) {
+            function creatCardHeader(classValue, text) {
                 let h = document.createElement('h5');
                 let hClassAtt = document.createAttribute('class');
                 hClassAtt.value = classValue;
@@ -112,7 +103,7 @@ const drawCard = async () => {
 
                 return h;
             }
-            function createP(classValue, text) {
+            function createParagraph(classValue, text) {
                 let p = document.createElement('p');
                 let pClassAtt = document.createAttribute('class');
                 pClassAtt.value = classValue;
@@ -121,7 +112,7 @@ const drawCard = async () => {
 
                 return p;
             }
-            function creatImg(classValue, imgSrc, alt){
+            function creatImg(classValue, imgSrc, alt) {
                 let img = document.createElement('img');
                 let imgClassAtt = document.createAttribute('class');
                 imgClassAtt.value = classValue;
@@ -151,15 +142,15 @@ const drawCard = async () => {
         }
     }
 }
-
 drawCardBtn.addEventListener('click', drawCard);
+
 
 const shuffleCard = async () => {
 
     const remaining = true;
 
     if (cardData.deckId === '') {
-        statusField.innerHTML += 'Ingen kortlek.'; ''
+        statusField.innerHTML += 'Ingen kortlek. '; ''
     }
     else {
         const res = await fetch('https://deckofcardsapi.com/api/deck/' + cardData.deckId + '/shuffle/?remaining=' + remaining);
@@ -168,8 +159,8 @@ const shuffleCard = async () => {
         if (data.success) {
             cardData.reminingCard = data.remaining;
 
-            statusField.innerHTML += `Kortleken blandad.`;
-            statusField.innerHTML += `${cardData.reminingCard} kort kvar.`;
+            statusField.innerHTML += `Kortleken blandad. `;
+            statusField.innerHTML += `${cardData.reminingCard} kort kvar. `;
         }
     }
 }
