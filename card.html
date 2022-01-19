@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Wars</title>
+    <title>Card</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -26,7 +26,7 @@
                         <path
                             d="M6.493 12.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.052.075l-.001.004-.004.01V14l.002.008a.147.147 0 0 0 .016.033.62.62 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.62.62 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411Z" />
                     </svg>
-                    Start Wars Biometrics
+                    Card
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,17 +34,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="nav navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link active" href="index.html">StarWars</a></li>
-                        <li class="nav-item"><a class="nav-link" href="card.html">Card</a> </li>
+                        <li class="nav-item"><a class="nav-link" href="index.html">StarWars</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="card.html">Card</a> </li>
                         <!-- <li class="nav-item"><a class="nav-link" href=".html">ToDo List</a></li> -->
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    
+
     <main>
-        <section class="container">
+        <!-- 
+            <section class="container">
 
             <form>
                 <div class="row">
@@ -59,6 +60,35 @@
                         <textarea class="form-control" id="starWarText" rows="5"></textarea>
                     </div>
             </form>
+        </section> 
+    -->
+        <section class="container mb-3">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button id="btnNew" type="button" class="btn btn-primary">Ny kortlek</button>
+                <button id="btnShuffle" type="button" class="btn btn-primary">Blanda</button>
+                <button id="btnDraw" type="button" class="btn btn-primary">Dra kort</button>
+            </div>
+
+            <div id="statusField" class="alert alert-primary mt-3" role="alert">
+            </div>
+        </section>
+        <section class="container">
+            <div id="cardSection" class="row m-1">
+<!-- 
+            <div class="col mb-2">
+                <div class="card m-1" style="width: 12rem;">
+                    <img src="" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+ -->
+            </div>
         </section>
     </main>
 
@@ -70,7 +100,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <script src="script.js"></script>
+    <script src="card.js"></script>
 </body>
 
 </html>

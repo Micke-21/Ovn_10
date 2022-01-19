@@ -1,4 +1,12 @@
-Botstrap
-Hur får man till knappar så det liger nära fältet.
+*** Botstrap
+Hur använder man Botstrap? 
+Knepigt att veta vilka taggar som hör ihop och så!
 
-id vs name på fält?
+Hur får man till knappar så det ligger nära fältet.
+
+
+
+id vs name taggar på fält?
+
+
+submit eller click vad ska man lyssna på?
