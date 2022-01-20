@@ -21,13 +21,10 @@ const getNewCard = async () => {
     }
     const res = await fetch(uri);
 
-    console.log(res);
-
     if (res.status !== 200)
         throw new Error('Faile to get card')
 
     const data = await res.json();
-    console.log(data);
 
     if (data.success) {
         cardData.deckId = data.deck_id
@@ -38,11 +35,8 @@ const getNewCard = async () => {
         statusField.innerHTML = `Ny kortlek skapad.<br>`
         statusField.innerHTML += `${cardData.reminingCard} kort kvar.<br>`;
         statusField.innerHTML += `Deck id: "${cardData.deckId}".<br>`;
-
     }
-
 }
-
 newCardBtn.addEventListener('click', getNewCard);
 
 
@@ -164,5 +158,4 @@ const shuffleCard = async () => {
         }
     }
 }
-
 shuffleCardBtn.addEventListener('click', shuffleCard);

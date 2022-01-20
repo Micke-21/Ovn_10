@@ -28,7 +28,6 @@ function getApi() {
                     // starWarText.value += ('\nKön: ' + element.properties.gender);
                     // starWarText.value += ('\nHårfärg: ' + element.properties.hair_color);
 
-
                     let swt =
                         `Description: ${element.description}, 
 Namn: ${element.properties.name}
