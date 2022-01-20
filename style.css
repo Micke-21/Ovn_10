@@ -19,15 +19,15 @@ body{
     border-top: 0px;
   }
 
-.card-title{
-    font-size:medium;
-}
+.card-title {
+    font-size: medium;
+  }
+
 .bg-primary {
     background-color: #5998f7 !important;
   }
 
- footer{
+footer{
     height: 50px;
     /* background-color: rgb(241, 234, 217); */
-    
 }

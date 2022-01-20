@@ -16,7 +16,7 @@ function getApi() {
             console.log('Data: ' + data.result)
             //console.log(data.result[0].properties.height);
 
-            if (data.result !== undefined && data.result.length > 0){
+            if (data.result !== undefined && data.result.length > 0) {
                 starWarText.value = '';
 
                 data.result.forEach(element => {
@@ -40,21 +40,12 @@ Hårfärg: ${element.properties.hair_color}`;
 
                     starWarText.value = swt;
 
-                    console.log(swt);
-                    // console.log('Desription: '+ element.description);
-                    // console.log('Name: '+ element.properties.name);
-                    // console.log('Height: '+ element.properties.height);
-                    // console.log('Birth year: '+ element.properties.birth_year);
                 });
             }
             else {
                 starWarText.value = 'Hittade inte.';
-
             }
         })
         .catch(err => console.log('Error ' + err));
-
-
-
 
 }
