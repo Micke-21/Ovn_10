@@ -4,9 +4,16 @@ Knepigt att veta vilka taggar som hör ihop och så!
 
 Hur får man till knappar så det ligger nära fältet.
 
+Checkboxen i BishBosh hur får jag den att funka som den ska?
+- Just nu blir den inte ikryssad.
+- Ceckbox labeln syns inte 
 
 
 id vs name taggar på fält?
 
 
 submit eller click vad ska man lyssna på?
+
+*** Javascript
+Strukturera koden (classer)
+
