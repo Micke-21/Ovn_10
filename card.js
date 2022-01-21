@@ -12,29 +12,36 @@ const cardData = {
 }
 
 const getNewCard = async () => {
-    let uri = '';
-    if (cardData.deckId === '') {
-        uri = 'https://deckofcardsapi.com/api/deck/new/shuffle/';
+    try {
+
+
+        let uri = '';
+        if (cardData.deckId === '') {
+            uri = 'https://deckofcardsapi.com/api/deck/new/shuffle/';
+        }
+        else {
+            uri = 'https://deckofcardsapi.com/api/deck/' + cardData.deckId + '/return/';
+        }
+        const res = await fetch(uri);
+
+        if (res.status !== 200)
+            throw new Error('Faile to get card')
+
+        const data = await res.json();
+
+        if (data.success) {
+            cardData.deckId = data.deck_id
+            cardData.reminingCard = data.remaining;
+
+            cardSection.innerHTML = '';
+
+            statusField.innerHTML = `Ny kortlek skapad.<br>`
+            statusField.innerHTML += `${cardData.reminingCard} kort kvar.<br>`;
+            statusField.innerHTML += `Deck id: "${cardData.deckId}".<br>`;
+        }
     }
-    else {
-        uri = 'https://deckofcardsapi.com/api/deck/' + cardData.deckId + '/return/';
-    }
-    const res = await fetch(uri);
-
-    if (res.status !== 200)
-        throw new Error('Faile to get card')
-
-    const data = await res.json();
-
-    if (data.success) {
-        cardData.deckId = data.deck_id
-        cardData.reminingCard = data.remaining;
-
-        cardSection.innerHTML = '';
-
-        statusField.innerHTML = `Ny kortlek skapad.<br>`
-        statusField.innerHTML += `${cardData.reminingCard} kort kvar.<br>`;
-        statusField.innerHTML += `Deck id: "${cardData.deckId}".<br>`;
+    catch (error) {
+        statusField.innerHTML += 'ERROR ' + error;
     }
 }
 newCardBtn.addEventListener('click', getNewCard);
@@ -47,38 +54,42 @@ const drawCard = async () => {
         statusField.innerHTML += 'Ingen kortlek. '; ''
     }
     else {
-        const res = await fetch('https://deckofcardsapi.com/api/deck/' + cardData.deckId + '/draw/?count=1')
+        try {
 
-        const data = await res.json();
-        if (data.success) {
-            cardData.reminingCard = data.remaining;
+            const res = await fetch('https://deckofcardsapi.com/api/deck/' + cardData.deckId + '/draw/?count=1')
 
-            //cardSection.innerHTML = '';
-            statusField.innerHTML += `${cardData.reminingCard} kort kvar. `;
+            const data = await res.json();
+            if (data.success) {
+                cardData.reminingCard = data.remaining;
 
-            data.cards.forEach(c => {
-                //addCardDataInnerHTML(c);
-                addCardDataCreatElement(c);
-            });
+                //cardSection.innerHTML = ''; // Vill jag rensa fältet eller inte? just nu provar jag att inte göra det
+                statusField.innerHTML += `${cardData.reminingCard} kort kvar. `;
 
-            function addCardDataCreatElement(c) {
-                let divCol = crateDiv('col mb-2');
-                let divCard = crateDiv('card');
-                let divCardBody = crateDiv('card-body');
-                let imgChild = creatImg("card-img-top", c.image, 'Card ' + c.suit + ' ' + c.value);
-                let head = creatCardHeader('card-title', c.suit + ' ' + c.value);
-                let paragraph = createParagraph('card-text', 'Kortkod: ' + c.code);
+                data.cards.forEach(c => {
+                    //addCardDataInnerHTML(c);
+                    addCardDataCreatElement(c);
+                });
 
-                divCardBody.appendChild(head);
-                divCardBody.appendChild(paragraph);
+                function addCardDataCreatElement(c) {
+                    let divCol = crateDiv('col mb-2');
+                    let divCard = crateDiv('card');
+                    let divCardBody = crateDiv('card-body');
+                    let imgChild = creatImg("card-img-top", c.image, 'Card ' + c.suit + ' ' + c.value);
+                    let head = creatCardHeader('card-title', c.suit + ' ' + c.value);
+                    let paragraph = createParagraph('card-text', 'Kortkod: ' + c.code);
 
-                divCard.appendChild(imgChild);
-                divCard.appendChild(divCardBody);
+                    divCardBody.appendChild(head);
+                    divCardBody.appendChild(paragraph);
 
-                divCol.appendChild(divCard);
+                    divCard.appendChild(imgChild);
+                    divCard.appendChild(divCardBody);
 
-                cardSection.appendChild(divCol);
+                    divCol.appendChild(divCard);
+
+                    cardSection.appendChild(divCol);
+                }
             }
+
 
             function crateDiv(classValue) {
                 let div1 = document.createElement('div');
@@ -134,28 +145,35 @@ const drawCard = async () => {
             }
 
         }
+        catch (error) {
+            statusField.innerHTML += 'ERROR ' + error;
+        }
     }
 }
 drawCardBtn.addEventListener('click', drawCard);
 
 
 const shuffleCard = async () => {
+    try {
+        const remaining = true;
 
-    const remaining = true;
-
-    if (cardData.deckId === '') {
-        statusField.innerHTML += 'Ingen kortlek. '; ''
-    }
-    else {
-        const res = await fetch('https://deckofcardsapi.com/api/deck/' + cardData.deckId + '/shuffle/?remaining=' + remaining);
-
-        const data = await res.json();
-        if (data.success) {
-            cardData.reminingCard = data.remaining;
-
-            statusField.innerHTML += `Kortleken blandad. `;
-            statusField.innerHTML += `${cardData.reminingCard} kort kvar. `;
+        if (cardData.deckId === '') {
+            statusField.innerHTML += 'Ingen kortlek. '; ''
         }
+        else {
+            const res = await fetch('https://deckofcardsapi.com/api/deck/' + cardData.deckId + '/shuffle/?remaining=' + remaining);
+
+            const data = await res.json();
+            if (data.success) {
+                cardData.reminingCard = data.remaining;
+
+                statusField.innerHTML += `Kortleken blandad. `;
+                statusField.innerHTML += `${cardData.reminingCard} kort kvar. `;
+            }
+        }
+    }
+    catch (error) {
+        statusField.innerHTML += 'ERROR ' + error;
     }
 }
 shuffleCardBtn.addEventListener('click', shuffleCard);
